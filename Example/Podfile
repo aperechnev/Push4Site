@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Push4Site_Example' do
+  pod 'Push4Site', :path => '../'
+
+  target 'Push4Site_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
