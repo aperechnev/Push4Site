@@ -16,16 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let token = "dacd7f46202c11eba814309c23d3543b"
-        
-        Push4Site.shared.configure(with: token, launchOptions: launchOptions) { success, error in
-            print("Push4Site completed with configuration. Success: \(success)")
-            
-            Push4Site.shared.subscribeForNotifications { success, error in
-                print("Subscribed for notifications. Success: \(success)")
-            }
-        }
-        
+        Push4Site.shared.configure(with: "dacd7f46202c11eba814309c23d3543b",
+                                   launchOptions: launchOptions)
+        Push4Site.shared.subscribeForNotifications()
         return true
     }
 
