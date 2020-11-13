@@ -57,7 +57,6 @@ internal class AppDelegateImplementation: NSObject {
             appDelegateClass, originalSelector
         ) {
             method_exchangeImplementations(originalMethod, swizzledMethod)
-            method_exchangeImplementations(swizzledMethod, originalMethod)
         } else {
             class_addMethod(appDelegateClass,
                             swizzledSelector,

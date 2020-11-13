@@ -179,7 +179,7 @@ extension Push4Site: AppDelegateImplementationDelegate {
 
 extension Push4Site: UNUserNotificationCenterDelegate {
     
-    internal func userNotificationCenter(
+    public func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
