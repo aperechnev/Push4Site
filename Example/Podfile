@@ -5,5 +5,5 @@ target 'Push4Site_Example' do
 end
 
 target 'NotificationServiceExample' do
-  pod 'Alamofire'
+  pod 'Push4Site-UN', :path => '../'
 end

@@ -7,7 +7,7 @@
 //
 
 import UserNotifications
-import Alamofire
+import Push4Site_UN
 
 class NotificationService: UNNotificationServiceExtension {
     
@@ -21,36 +21,8 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        guard let bestAttemptContent = bestAttemptContent else {
-            contentHandler(request.content)
-            return
-        }
-        guard let urlString = bestAttemptContent.userInfo["attachment"] as? String else {
-            contentHandler(bestAttemptContent)
-            return
-        }
-        guard let url = URL(string: urlString) else {
-            contentHandler(bestAttemptContent)
-            return
-        }
-        
-        let destination: DownloadRequest.Destination = { _, _ in
-            let temporaryURL = FileManager.default.temporaryDirectory
-            let fileURL = temporaryURL.appendingPathComponent(url.lastPathComponent)
-            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
-        }
-        
-        AF.download(url, to: destination).response { response in
-            if response.error == nil, let imageURL = response.fileURL {
-                if let attachment = try? UNNotificationAttachment(
-                    identifier: "image", url: imageURL, options: nil
-                ) {
-                    bestAttemptContent.attachments = [attachment]
-                }
-            }
-            
-            self.contentHandler!(self.bestAttemptContent!)
-        }
+        NotificationServiceHelper.shared.process(request: request,
+                                                 contentHandler: contentHandler)
     }
     
     override func serviceExtensionTimeWillExpire() {
