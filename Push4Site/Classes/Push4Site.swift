@@ -66,7 +66,7 @@ public class Push4Site: NSObject {
      */
     public func configure(
         with token: String,
-        launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+        launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) {
         self.token = token
         

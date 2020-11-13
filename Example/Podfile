@@ -3,3 +3,7 @@ use_frameworks!
 target 'Push4Site_Example' do
   pod 'Push4Site', :path => '../'
 end
+
+target 'NotificationServiceExample' do
+  pod 'Alamofire'
+end
