@@ -603,6 +603,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = com.push4site.ios.test;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -625,6 +626,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = com.push4site.ios.test;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
