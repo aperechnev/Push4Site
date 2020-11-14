@@ -78,6 +78,10 @@ let eventId = "my_custom_event"
 Push4Site.shared.logEvent(with: eventId)
 ```
 
+## Example
+
+An example application, which showing how to work with Push4Site SDK, could be found in SDK's GitHub repository.
+
 ## License
 
 Push4Site is available under the MIT license. See the LICENSE file for more info.
