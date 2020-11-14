@@ -11,7 +11,7 @@ it, simply add the following line to your Podfile:
 pod 'Push4Site'
 ```
 
-If you need to customize remote notifications (e.g. show an image, arriving in notification), you also need to install Push4Site Notification Helper:
+If you need to customize remote notifications (e.g. show an image arriving in notification), you also need to install Push4Site Notification Helper:
 
 ```ruby
 pod 'Push4Site-UN'
