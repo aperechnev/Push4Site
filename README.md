@@ -24,7 +24,10 @@ To initialize Push4Site SDK, you can follow the steps described in example below
 ```Swift
 // AppDelegate.swift
 
+// ...
 import Push4Site // First, import Push4Site module
+
+// ...
 
 func application(
     _ application: UIApplication,
@@ -35,6 +38,8 @@ func application(
                              launchOptions: launchOptions)
   return true
 }
+
+// ...
 ```
 
 Then subscribe for remote notifications by calling the appropriate method in any place, where you want end-user to be asked to permission to subscribe for notifications:
