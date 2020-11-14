@@ -11,12 +11,6 @@ it, simply add the following line to your Podfile:
 pod 'Push4Site'
 ```
 
-If you need to customize remote notifications (e.g. to show an image arriving in notification), you also need to install Push4Site Notification Helper:
-
-```ruby
-pod 'Push4Site-UN'
-```
-
 ## Initialization
 
 To initialize Push4Site SDK, you can follow the steps described in example below:
@@ -47,6 +41,33 @@ Then subscribe for remote notifications by calling the appropriate method in any
 ```Swift
 Push4Site.shared.subscribeForNotifications()
 ```
+
+This is all what you need to start using Push4Site SDK.
+
+## Customizing notification appearence
+
+If you need to customize remote notifications (e.g. to show an image), you also need to install Push4Site Notification Helper:
+
+```ruby
+pod 'Push4Site-UN'
+```
+
+Then create a new target in your project with type of `Notification Service Extension`. After target was created, open it's start point in `NotificationService.swift` file and pass the notification request to Push4Site SDK:
+
+```Swift
+override func didReceive(
+    _ request: UNNotificationRequest,
+    withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
+) {
+    self.contentHandler = contentHandler
+    bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+
+    NotificationServiceHelper.shared.process(request: request,
+                                             contentHandler: contentHandler)
+}
+```
+
+Now your app is ready to show images in remote notifications.
 
 ## License
 
