@@ -42,7 +42,7 @@ func application(
 // ...
 ```
 
-Then subscribe for remote notifications by calling the appropriate method in any place, where you want end-user to be asked to permission to subscribe for notifications:
+Then subscribe for remote notifications by calling the appropriate method in any place, where you want end-user to be asked for permission to subscribe for notifications:
 
 ```Swift
 Push4Site.shared.subscribeForNotifications()
