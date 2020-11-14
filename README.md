@@ -1,15 +1,6 @@
 # Push4Site
 
-[![CI Status](https://img.shields.io/travis/Alexander Perechnev/Push4Site.svg?style=flat)](https://travis-ci.org/Alexander Perechnev/Push4Site)
-[![Version](https://img.shields.io/cocoapods/v/Push4Site.svg?style=flat)](https://cocoapods.org/pods/Push4Site)
-[![License](https://img.shields.io/cocoapods/l/Push4Site.svg?style=flat)](https://cocoapods.org/pods/Push4Site)
-[![Platform](https://img.shields.io/cocoapods/p/Push4Site.svg?style=flat)](https://cocoapods.org/pods/Push4Site)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+Push4Site is the official iOS framework that provides access to Push4Site.com API.
 
 ## Installation
 
@@ -20,9 +11,11 @@ it, simply add the following line to your Podfile:
 pod 'Push4Site'
 ```
 
-## Author
+If you need to customize remote notifications (e.g. show an image, arriving in notification), you also need to install Push4Site Notification Helper:
 
-Alexander Perechnev, alexander@perechnev.com
+```ruby
+pod 'Push4Site-UN'
+```
 
 ## License
 
