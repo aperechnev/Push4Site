@@ -80,7 +80,7 @@ Push4Site.shared.logEvent(with: eventId)
 
 ## Example
 
-An example application, which showing how to work with Push4Site SDK, could be found in SDK's GitHub repository.
+An example application, which shows how to work with Push4Site SDK, could be found in SDK's GitHub repository.
 
 ## License
 
