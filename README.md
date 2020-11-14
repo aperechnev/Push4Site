@@ -69,6 +69,15 @@ override func didReceive(
 
 Now your app is ready to show images in remote notifications.
 
+## Sending custom events
+
+To send custom event, just call the appropriate SDK method:
+
+```Swift
+let eventId = "my_custom_event"
+Push4Site.shared.logEvent(with: eventId)
+```
+
 ## License
 
 Push4Site is available under the MIT license. See the LICENSE file for more info.
