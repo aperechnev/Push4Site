@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Push4Site'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'The official iOS SDK for Push4Site.com.'
 
   s.description      = <<-DESC
