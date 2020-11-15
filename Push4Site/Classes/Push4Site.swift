@@ -10,10 +10,9 @@ import UserNotifications
 import RxSwift
 import Moya
 
-public protocol Push4SiteDelegate: class {
-    func didFailToUpdateDeviceToken(with error: Error)
-}
-
+/**
+ The main class that provides API to end-users.
+ */
 public class Push4Site: NSObject {
     
     private let disposeBag = DisposeBag()
@@ -25,8 +24,7 @@ public class Push4Site: NSObject {
     private var token: String?
     private var subscriberId: String?
     
-    public var delegate: Push4SiteDelegate?
-    public var deviceToken: Data? {
+    internal var deviceToken: Data? {
         didSet {
             if let deviceToken = self.deviceToken {
                 self.update(with: deviceToken)
@@ -62,37 +60,39 @@ public class Push4Site: NSObject {
     
     /**
      Initialize the library with given token and launch options.
-     
      - Parameters:
         - token: A token that you can obtain in admin panel on the website.
-        - launchOptions: -
-        - completion: -
+        - launchOptions: Launch options passed to application's `application(_:didFinishLaunchingWithOptions:)` method.
      */
     public func configure(
         with token: String,
-        launchOptions: [UIApplicationLaunchOptionsKey: Any]?,
-        completion: @escaping (Bool, String?) -> ()
+        launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) {
+        self.token = token
+        
         self.genericProvider.rx
             .request(.getAccountDetails(token: token))
             .map(AccountDetailsResponse.self)
             .subscribe(onSuccess: { response in
                 if response.success {
-                    self.token = token
+                    print("Push4Site successfully initialized.")
+                } else {
+                    var message = "Failed to initialize Push4Site"
+                    if let error = response.errorReason {
+                        message += ": \(error)"
+                    } else {
+                        message += "."
+                    }
+                    print(message)
                 }
-                completion(response.success, response.errorReason)
-            }, onError: { error in
-                completion(false, nil)
             })
             .disposed(by: self.disposeBag)
     }
     
     /**
-     Not documented.
+     Ask user for access to subscribe for remote notifications and subscribe to remote notifications in case of user's confirmation.
      */
-    public func subscribeForNotifications(
-        completion: @escaping (Bool, Error?) -> ()
-    ) {
+    public func subscribeForNotifications() {
         self.appDelegate.delegate = self
         self.appDelegate.swizzle()
         
@@ -101,7 +101,6 @@ public class Push4Site: NSObject {
         
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             DispatchQueue.main.async(execute: UIApplication.shared.registerForRemoteNotifications)
-            completion(granted, error)
         }
     }
     
@@ -131,15 +130,21 @@ public class Push4Site: NSObject {
             .request(target)
             .map(AddSubscriberResponse.self)
             .subscribe(onSuccess: { response in
-                self.persistentStore.subscriberId = response.subscriberId
+                if response.success {
+                    self.persistentStore.subscriberId = response.subscriberId
+                } else {
+                    print("Failed to update device token: \(response.errorReason ?? "unknown error")")
+                }
             }, onError: { error in
-                self.delegate?.didFailToUpdateDeviceToken(with: error)
+                print("Failed to update device token: \(error.localizedDescription)")
             })
             .disposed(by: self.disposeBag)
     }
     
     /**
-     Not documented.
+     Log custom event with given identifier.
+     - Parameters:
+        - id: Event identifier.
      */
     public func logEvent(with id: String) {
         guard let token = self.token else {
@@ -152,7 +157,13 @@ public class Push4Site: NSObject {
         self.genericProvider.rx
             .request(.segmentationEvent(token: token, eventName: id, subscriberId: subscriberId))
             .map(SegmentationEventResponse.self)
-            .subscribe(onSuccess: nil, onError: nil)
+            .subscribe(onSuccess: { response in
+                if response.success == false {
+                    print("Failed to log custom event: \(response.errorReason ?? "unknown error")")
+                }
+            }, onError: { error in
+                print("Failed to log custom event: \(error.localizedDescription)")
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -160,7 +171,7 @@ public class Push4Site: NSObject {
 
 extension Push4Site: AppDelegateImplementationDelegate {
     
-    func didObtain(deviceToken: Data) {
+    internal func didObtain(deviceToken: Data) {
         self.deviceToken = deviceToken
     }
     

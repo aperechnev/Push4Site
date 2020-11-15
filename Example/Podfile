@@ -1,11 +1,10 @@
 use_frameworks!
+platform :ios, '10.0'
 
 target 'Push4Site_Example' do
   pod 'Push4Site', :path => '../'
+end
 
-  target 'Push4Site_Tests' do
-    inherit! :search_paths
-
-    
-  end
+target 'NotificationServiceExample' do
+  pod 'Push4Site-UN', :path => '../'
 end
