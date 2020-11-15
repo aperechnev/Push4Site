@@ -9,34 +9,18 @@
 Pod::Spec.new do |s|
   s.name             = 'Push4Site'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of Push4Site.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'The official iOS SDK for Push4Site.com.'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+The official framework for Push4Site.com service.
                        DESC
 
-  s.homepage         = 'https://github.com/Alexander Perechnev/Push4Site'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/aperechnev/Push4Site'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Alexander Perechnev' => 'alexander@perechnev.com' }
-  s.source           = { :git => 'https://github.com/Alexander Perechnev/Push4Site.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/aperechnev/Push4Site.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
-
   s.source_files = 'Push4Site/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'Push4Site' => ['Push4Site/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'Moya/RxSwift', '~> 14.0'
 end
